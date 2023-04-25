@@ -1,0 +1,45 @@
+Development environment setup and basic knowledge checklist:
+
+0. Have Java, Git, IDE installed
+
+1. text editor
+2. set JAVA_HOME
+3. Knowledge sync file
+
+4. IDE basics:
+-- Autocomplete (Ctrl+Space)
+-- Navigate into (Ctrl+Click)
+-- QuickDocs (Ctrl+Q)
+-- Find in all files (Ctrl+Shift+F)
+-- AUTOFORMAT !!!!!
+
+Eclipse:
+- https://www.baeldung.com/eclipse-shortcuts
+- https://www.eclipse.org/getting-started/documents/eclipse-ide-keybindings.pdf
+
+Intellij:
+- Help > Learn IDE
+
+
+5. Bookmark markdown cheetsheet
+-- https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+-- https://learnxinyminutes.com/docs/markdown/
+
+6. Git, go through: https://learngitbranching.js.org/
+
+7. (optional) Linux terminal
+- autocomplete via Tab!
+- cd
+- ls -la
+- cat
+- mv, cp
+- rm
+-- rm -rf
+- Ctrl+R for quick search through history
+- optional: less, nano
+
+
+8. (optional) Utiliti apps:
+-- postman
+-- Process Explorer
+-- OBS Studio
