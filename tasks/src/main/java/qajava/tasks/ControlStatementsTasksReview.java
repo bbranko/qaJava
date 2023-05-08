@@ -1,4 +1,4 @@
-/*
+package qajava.tasks;/*
 Split into groups of 3 to 5.
 Work on tasks individually.
 Once everyone is done, exchange your work and compare solutions.

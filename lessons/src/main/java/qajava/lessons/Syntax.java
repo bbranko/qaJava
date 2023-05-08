@@ -1,3 +1,5 @@
+package qajava.lessons;
+
 // this is a comment
 /*
   This
