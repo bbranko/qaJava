@@ -16,6 +16,7 @@ class DoublyLinkedListTest {
   final int NON_EXISTENT_VALUE = Integer.MAX_VALUE;
   final int NEGATIVE_INDEX = -1;
 
+  class DoublyLinkedListUnderTest extends DoublyLinkedList {}
 
   @Test
   void add() {
@@ -165,4 +166,43 @@ class DoublyLinkedListTest {
 
     assertThrows(IndexOutOfBoundsException.class, () -> list.addAtIndex(NON_EXISTENT_VALUE, TEST_VALUE_1));
   }
+
+  //just to demonstrate that we are properly achieving double linking
+  //though in real life we would be testing publicly exposed api as opposed to internal state
+  @Test
+  void confirmThatListIsDoublyLinked() {
+    DoublyLinkedListUnderTest list = new DoublyLinkedListUnderTest();
+
+    list.add(1);
+    list.add(2);
+    list.addAtIndex(1, 3);
+    //this sets up list as such
+    //          | 1    |     | 3    |     | 2    |
+    //          | next | --> | next | --> | next | --> null
+    // null <-- | prev | <-- | prev | <-- | prev |
+
+    assertEquals(list.value, 1);
+    assertEquals(list.next, list.getElementAtIndex(1));
+    assertEquals(list.prev, null);
+    assertEquals(list.getElementAtIndex(1).value, 3);
+    assertEquals(list.getElementAtIndex(1).next, list.getElementAtIndex(2));
+    assertEquals(list.getElementAtIndex(1).prev, list);
+    assertEquals(list.getElementAtIndex(2).value, 2);
+    assertEquals(list.getElementAtIndex(2).next, null);
+    assertEquals(list.getElementAtIndex(2).prev, list.getElementAtIndex(1));
+
+    list.remove(3);
+    //new state is now
+    //          | 1    |     | 2    |
+    //          | next | --> | next | --> null
+    // null <-- | prev | <-- | prev |
+
+    assertEquals(list.value, 1);
+    assertEquals(list.next, list.getElementAtIndex(1));
+    assertEquals(list.prev, null);
+    assertEquals(list.getElementAtIndex(1).value, 2);
+    assertEquals(list.getElementAtIndex(1).next, null);
+    assertEquals(list.getElementAtIndex(1).prev, list);
+  }
+
 }

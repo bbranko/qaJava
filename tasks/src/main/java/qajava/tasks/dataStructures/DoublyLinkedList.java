@@ -9,8 +9,8 @@ import java.util.Objects;
 public class DoublyLinkedList implements IntList {
 
   protected Integer value;
-  private DoublyLinkedList next;
-  private DoublyLinkedList prev;
+  protected DoublyLinkedList next;
+  protected DoublyLinkedList prev;
 
 
   @Override
@@ -59,7 +59,7 @@ public class DoublyLinkedList implements IntList {
     return doIContain || doesNextContain;
   }
 
-  private DoublyLinkedList getElementAtIndex(int index) {
+  protected DoublyLinkedList getElementAtIndex(int index) {
     //this is OUR private method.
     //We will assume that we are always using it correctly, all validations and checks will be done outside it!
     if (index == 0) {
