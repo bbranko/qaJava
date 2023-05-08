@@ -1,3 +1,5 @@
+package qajava.lessons;
+
 public class ControlStatements {
   public static void main(String[] args) {
     //there are two basic types of control structures: branching and looping

@@ -1,3 +1,5 @@
+package qajava.lessons;
+
 import java.math.BigDecimal;
 
 public class PrimitiveTypes {

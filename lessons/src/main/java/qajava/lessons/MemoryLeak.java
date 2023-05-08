@@ -1,3 +1,5 @@
+package qajava.lessons;
+
 import java.util.HashSet;
 import java.util.Set;
 

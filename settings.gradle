@@ -12,5 +12,16 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.4.0'
 }
 
+
+/*
+At least know this commands and their effects:
+gradle tasks - to list all available gradle tasks
+gradle dependencies - to list dependencies per defined source set
+gradle <taskName> --dry-run - to list which task would be executed and in what order when executing <taskName>
+*/
+
+
+
 rootProject.name = 'qaJava'
-include('app')
+include('lessons')
+include('tasks')
