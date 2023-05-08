@@ -20,37 +20,25 @@ public class SingleLinkedList implements IntList {
     }
   }
 
+  private void removeValueFromIndex0() {
+    if (next == null) {
+      //if this is the only value, just remove it
+      this.value = null;
+    } else {
+      // if there is next value in list, next value becomes first
+      this.value = next.value;
+      this.next = next.next;
+    }
+  }
+
   @Override
   public void remove(Integer value) {
     final boolean doIContain = Objects.equals(this.value, value);
 
     if (doIContain) {
-      if (next == null) {
-        //if this is the only value, just remove it
-        this.value = null;
-      } else {
-        // if there is next value in list, next value becomes first
-        this.value = next.value;
-        this.next = next.next;
-      }
+      removeValueFromIndex0();
     } else if (next != null) {
-      //else we need to traverse rest of the list
-      SingleLinkedList previous = this;
-      SingleLinkedList next = this.next;
-
-      while (next != null) {
-        boolean doesNextOneContain = Objects.equals(next.value, value);
-        if (doesNextOneContain) {
-          //if next element contains number to be removed, remove element by rewiring
-          //(we simply skip the element, and Garbage Collector will take care of the rest)
-          previous.next = next.next;
-          return; //no need to continue.
-        } else {
-          //move to next element
-          previous = next;
-          next = next.next;
-        }
-      }
+      next.remove(value);
     }
 
   }
@@ -63,6 +51,25 @@ public class SingleLinkedList implements IntList {
     return doIContain || doesNextContain;
   }
 
+  private SingleLinkedList getElementAtIndex(int index) {
+    //this is OUR private method.
+    //We will assume that we are always using it correctly, all validations and checks will be done outside it!
+    if (index == 0) {
+      //this is always first (index 0) element
+      return this;
+    } else {
+      //for other indexes, we have to traverse rest of the list
+      int currentIndex = 1;
+      SingleLinkedList current = next;
+      while (currentIndex < index && current != null) {
+        currentIndex++;
+        current = current.next;
+      }
+
+      return current;
+    }
+  }
+
   @Override
   public Integer get(Integer index) {
     if (index < 0) {
@@ -72,23 +79,28 @@ public class SingleLinkedList implements IntList {
       throw new IndexOutOfBoundsException("List is empty!");
     }
 
-    if (index == 0) {
-      //first element, so we return it
-      return value;
-    } else {
-      //we have to traverse rest of the list
-      int currentIndex = 1;
-      SingleLinkedList current = next;
-      while (currentIndex < index && current != null) {
-        currentIndex++;
-        current = current.next;
-      }
+    SingleLinkedList elementAtAnIndex = getElementAtIndex(index);
 
-      if (current == null) {
-        throw new IndexOutOfBoundsException("Index out of bounds!");
-      } else {
-        return current.value;
-      }
+    if (elementAtAnIndex == null) {
+      throw new IndexOutOfBoundsException("Index out of bounds!");
+    } else {
+      return elementAtAnIndex.value;
+    }
+  }
+
+  private void insertValueAtIndex0(Integer value) {
+    if (this.value == null) {
+      //if list was empty, we add first value
+      this.value = value;
+    } else {
+      //if it was not, we need to insert an element before first element,
+      //and we will do that by copying first element and rewiring
+      SingleLinkedList newElement = new SingleLinkedList();
+      newElement.value = this.value;
+      newElement.next = next;
+
+      this.value = value;
+      next = newElement;
     }
   }
 
@@ -99,27 +111,10 @@ public class SingleLinkedList implements IntList {
     }
 
     if (index == 0) {
-      if (this.value == null) {
-        //if list was empty, we add first value
-        this.value = value;
-      } else {
-        //if it was not, we need to insert an element before first element,
-        //and we will do that by copying first element and rewiring
-        SingleLinkedList newElement = new SingleLinkedList();
-        newElement.value = this.value;
-        newElement.next = next;
-
-        this.value = value;
-        next = newElement;
-      }
+      insertValueAtIndex0(value);
     } else {
       //we need to traverse the list to find index where to insert element
-      int currentIndex = 1;
-      SingleLinkedList previous = this;
-      while (currentIndex < index - 1 && previous != null) {
-        currentIndex++;
-        previous = previous.next;
-      }
+      SingleLinkedList previous = getElementAtIndex(index - 1);
 
       if (previous == null) {
         throw new IndexOutOfBoundsException("Index out of bounds!");
@@ -130,8 +125,8 @@ public class SingleLinkedList implements IntList {
         newElement.next = previous.next;
         previous.next = newElement;
       }
-
     }
 
   }
+
 }
