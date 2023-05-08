@@ -1,5 +1,7 @@
 package qajava.tasks.dataStructures;
 
+import java.util.Objects;
+
 public class SingleLinkedList implements IntList {
 
   protected Integer value;
@@ -26,15 +28,10 @@ public class SingleLinkedList implements IntList {
 
   @Override
   public Boolean contains(Integer value) {
-    if (this.value == value) {
-      return true;
-    } else {
-      if (next == null) {
-        return false;
-      } else {
-        return next.contains(value);
-      }
-    }
+    final boolean doIContain = Objects.equals(this.value, value);
+    final boolean doesNextContain = next != null && next.contains(value);
+
+    return doIContain || doesNextContain;
   }
 
   @Override
