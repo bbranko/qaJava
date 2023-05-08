@@ -1,0 +1,105 @@
+alias npp="'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -nosession -noPlugin"
+alias sublime="'C:/Program Files/Sublime Text 3/sublime_text.exe' -n -w"
+
+#git abbreviations
+alias g="git"
+__git_complete g _git
+alias clone="git clone"
+__git_complete clone _git_clone
+alias config="git config"
+__git_complete config _git_config
+alias reflog="git reflog"
+__git_complete reflog _git_reflog
+alias bs="git bisect"
+alias bisect="git bisect"
+__git_complete bs _git_bisect
+__git_complete bisect _git_bisect
+
+alias s="git status -s"
+__git_complete s _git_status
+
+alias a="git add"
+__git_complete a _git_add
+alias b="git branch"
+__git_complete b _git_branch
+alias c="git checkout"
+__git_complete c _git_checkout
+
+alias f="git fetch -p"
+alias fa="git fetch -p --all"
+alias fm="git fetch -p --multiple"
+__git_complete f _git_fetch
+__git_complete fa _git_fetch
+__git_complete fm _git_fetch
+alias merge="git merge"
+__git_complete merge _git_merge
+alias hmerge="git merge -s recursive -X histogram -X ignore-space-change -X no-renames"
+__git_complete hmerge _git_merge
+alias mt="git mergetool"
+__git_complete mt _git_mergetool
+
+alias d="git diff"
+alias ds="git diff --stat"
+alias dt="git difftool"
+__git_complete d _git_diff
+__git_complete ds _git_diff
+__git_complete dt _git_difftool
+
+alias ce="git commit --allow-empty -m"
+alias cm="git commit --verbose -m"
+alias ci="git commit --verbose"
+alias ca="git commit --verbose --all"
+alias amend="git commit --verbose --amend"
+__git_complete ce _git_commit
+__git_complete cm _git_commit
+__git_complete ci _git_commit
+__git_complete ca _git_commit
+__git_complete amend _git_commit
+
+alias rs="git reset"
+alias hard="git reset --hard"
+alias unstage="git reset HEAD"
+alias pop="git reset --soft HEAD~"
+__git_complete rs _git_reset
+__git_complete hard _git_reset
+__git_complete unstage _git_reset
+__git_complete pop _git_reset
+
+alias rv="git revert"
+alias revert="git revert"
+__git_complete rv _git_revert
+__git_complete revert _git_revert
+
+alias ch="git cherry-pick"
+__git_complete ch _git_cherry_pick
+alias rb="git rebase"
+alias rbi="git rebase -i"
+__git_complete rbi _git_rebase
+__git_complete rb _git_rebase
+
+alias pull="git pull"
+__git_complete pull _git_pull
+alias push="git push"
+__git_complete push _git_push
+alias stash="git stash"
+__git_complete stash _git_stash
+
+alias log="git log"
+alias lgl="git log --graph --abbrev-commit --decorate --format=format:'\
+%C(bold blue)%h:%C(reset) \
+%C(bold green)(%ar)%C(reset) \
+%C(white)%s%C(reset) \
+%C(dim white)[%an]%C(reset)\
+%C(bold yellow)%d%C(reset)'"
+
+alias lg="lgl -n 15"
+alias lga="lg --all"
+__git_complete log _git_log
+__git_complete lgl _git_log
+__git_complete lg _git_log
+__git_complete lga _git_log
+
+# !git log --pretty=oneline --abbrev-commit --graph --decorate git reflog | cut -d " " -f 1
+
+
+
