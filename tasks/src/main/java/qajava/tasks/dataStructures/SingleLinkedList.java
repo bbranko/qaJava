@@ -3,10 +3,20 @@ package qajava.tasks.dataStructures;
 public class SingleLinkedList implements IntList {
 
   protected Integer value;
+  private SingleLinkedList next;
+
 
   @Override
   public void add(Integer value) {
-    this.value = value;
+    if (this.value == null) {
+      this.value = value;
+    } else {
+      if (next == null) {
+        next = new SingleLinkedList();
+      }
+      next.add(value);
+    }
+
   }
 
   @Override
@@ -16,7 +26,15 @@ public class SingleLinkedList implements IntList {
 
   @Override
   public Boolean contains(Integer value) {
-    return this.value == value;
+    if (this.value == value) {
+      return true;
+    } else {
+      if (next == null) {
+        return false;
+      } else {
+        return next.contains(value);
+      }
+    }
   }
 
   @Override
