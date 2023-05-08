@@ -1,6 +1,9 @@
 package qajava.tasks.dataStructures;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,9 +12,10 @@ class SingleLinkedListTest {
   final int TEST_VALUE_1 = 1;
   final int TEST_VALUE_2 = 2;
   final int NON_EXISTENT_VALUE = Integer.MAX_VALUE;
+  final int NEGATIVE_INDEX = -1;
 
 
-  class SingleLinkedListUnderTest extends SingleLinkedList{}
+  class SingleLinkedListUnderTest extends SingleLinkedList {}
 
 
   @Test
@@ -109,8 +113,33 @@ class SingleLinkedListTest {
   }
 
   @Test
+  void get_withTwoValues() {
+    SingleLinkedList list = new SingleLinkedList();
+    list.add(TEST_VALUE_1);
+    list.add(TEST_VALUE_2);
+
+    assertEquals(list.get(0), TEST_VALUE_1);
+    assertEquals(list.get(1), TEST_VALUE_2);
+  }
+
+  @Test
+  void get_throwsOBE_ifListEmpty() {
+    SingleLinkedList list = new SingleLinkedList();
+
+    assertThrows(IndexOutOfBoundsException.class, () -> list.get(0));
+  }
+
+  @Test
+  void get_throwsOBE_ifNegativeIndexPassed() {
+    SingleLinkedList list = new SingleLinkedList();
+
+    assertThrows(IndexOutOfBoundsException.class, () -> list.get(NEGATIVE_INDEX));
+  }
+
+  @Test
   void get_throwsOBE_ifOutOfBoundsIndexPassed() {
     SingleLinkedList list = new SingleLinkedList();
+    list.add(TEST_VALUE_1);
 
     assertThrows(IndexOutOfBoundsException.class, () -> list.get(NON_EXISTENT_VALUE));
   }
@@ -135,6 +164,13 @@ class SingleLinkedListTest {
 
     assertEquals(list.get(0), TEST_VALUE_1);
     assertEquals(list.get(1), TEST_VALUE_2);
+  }
+
+  @Test
+  void addAtIndex_throwsOBE_ifIndexNegative() {
+    SingleLinkedList list = new SingleLinkedList();
+
+    assertThrows(IndexOutOfBoundsException.class, () -> list.addAtIndex(NEGATIVE_INDEX, TEST_VALUE_1));
   }
 
   @Test
