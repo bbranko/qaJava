@@ -65,7 +65,31 @@ public class SingleLinkedList implements IntList {
 
   @Override
   public Integer get(Integer index) {
-    return this.value;
+    if (index < 0) {
+      throw new IndexOutOfBoundsException("Index cannot be negative!");
+    }
+    if (value == null) {
+      throw new IndexOutOfBoundsException("List is empty!");
+    }
+
+    if (index == 0) {
+      //first element, so we return it
+      return value;
+    } else {
+      //we have to traverse rest of the list
+      int currentIndex = 1;
+      SingleLinkedList current = next;
+      while (currentIndex < index && current != null) {
+        currentIndex++;
+        current = current.next;
+      }
+
+      if(current == null){
+        throw new IndexOutOfBoundsException("Index out of bounds!");
+      } else {
+        return current.value;
+      }
+    }
   }
 
   @Override
