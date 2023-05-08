@@ -84,7 +84,7 @@ public class SingleLinkedList implements IntList {
         current = current.next;
       }
 
-      if(current == null){
+      if (current == null) {
         throw new IndexOutOfBoundsException("Index out of bounds!");
       } else {
         return current.value;
@@ -94,6 +94,44 @@ public class SingleLinkedList implements IntList {
 
   @Override
   public void addAtIndex(Integer index, Integer value) {
-    this.value = value;
+    if (index < 0) {
+      throw new IndexOutOfBoundsException("Index cannot be negative!");
+    }
+
+    if (index == 0) {
+      if (this.value == null) {
+        //if list was empty, we add first value
+        this.value = value;
+      } else {
+        //if it was not, we need to insert an element before first element,
+        //and we will do that by copying first element and rewiring
+        SingleLinkedList newElement = new SingleLinkedList();
+        newElement.value = this.value;
+        newElement.next = next;
+
+        this.value = value;
+        next = newElement;
+      }
+    } else {
+      //we need to traverse the list to find index where to insert element
+      int currentIndex = 1;
+      SingleLinkedList previous = this;
+      while (currentIndex < index - 1 && previous != null) {
+        currentIndex++;
+        previous = previous.next;
+      }
+
+      if (previous == null) {
+        throw new IndexOutOfBoundsException("Index out of bounds!");
+      } else {
+        //insert and rewire
+        SingleLinkedList newElement = new SingleLinkedList();
+        newElement.value = value;
+        newElement.next = previous.next;
+        previous.next = newElement;
+      }
+
+    }
+
   }
 }
