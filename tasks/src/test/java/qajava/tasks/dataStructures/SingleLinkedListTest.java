@@ -6,9 +6,12 @@ import org.junit.jupiter.api.Test;
 
 class SingleLinkedListTest {
 
-  final int TEST_VALUE = 1;
+  final int TEST_VALUE_1 = 1;
+  final int TEST_VALUE_2 = 2;
   final int NON_EXISTENT_VALUE = Integer.MAX_VALUE;
 
+
+  class SingleLinkedListUnderTest extends SingleLinkedList{}
 
 
   @Test
@@ -17,40 +20,92 @@ class SingleLinkedListTest {
     SingleLinkedList list = new SingleLinkedList();
 
     //operation under test
-    list.add(TEST_VALUE);
+    list.add(TEST_VALUE_1);
 
     //test
-    assertTrue(list.contains(TEST_VALUE));
+    assertTrue(list.contains(TEST_VALUE_1));
+  }
+
+  @Test
+  void add_with2elements() {
+    //setup
+    SingleLinkedList list = new SingleLinkedList();
+
+    //operation under test
+    list.add(TEST_VALUE_1);
+    list.add(TEST_VALUE_2);
+
+    //test
+    assertTrue(list.contains(TEST_VALUE_1));
+    assertTrue(list.contains(TEST_VALUE_2));
   }
 
   @Test
   void remove() {
     //setup
     SingleLinkedList list = new SingleLinkedList();
-    list.add(TEST_VALUE);
+    list.add(TEST_VALUE_1);
 
     //operation under test
-    list.remove(TEST_VALUE);
+    list.remove(TEST_VALUE_1);
 
     //test
-    assertFalse(list.contains(TEST_VALUE));
+    assertFalse(list.contains(TEST_VALUE_1));
+  }
+
+  @Test
+  void remove_oneOfTwoValues() {
+    //setup
+    SingleLinkedList list = new SingleLinkedList();
+    list.add(TEST_VALUE_1);
+    list.add(TEST_VALUE_2);
+
+    //operation under test
+    list.remove(TEST_VALUE_1);
+
+    //test
+    assertFalse(list.contains(TEST_VALUE_1));
+    assertTrue(list.contains(TEST_VALUE_2));
   }
 
   @Test
   void contains() {
     SingleLinkedList list = new SingleLinkedList();
-    list.add(TEST_VALUE);
+    list.add(TEST_VALUE_1);
 
-    assertTrue(list.contains(TEST_VALUE));
+    assertTrue(list.contains(TEST_VALUE_1));
     assertFalse(list.contains(NON_EXISTENT_VALUE));
+  }
+
+  @Test
+  void contains_withTwoValues() {
+    SingleLinkedList list = new SingleLinkedList();
+    list.add(TEST_VALUE_1);
+    list.add(TEST_VALUE_2);
+
+    assertTrue(list.contains(TEST_VALUE_1));
+    assertTrue(list.contains(TEST_VALUE_2));
+    assertFalse(list.contains(NON_EXISTENT_VALUE));
+  }
+
+
+  void contains_withRealValueCheck() {
+    SingleLinkedListUnderTest list = new SingleLinkedListUnderTest();
+    list.add(TEST_VALUE_1);
+    list.add(TEST_VALUE_2);
+
+    //we can access inner state with extended class if logically we cannot confirm state.
+    //code smell, because it causes coupling!
+    assertEquals(list.value, TEST_VALUE_1);
+//    assertEquals(list.next.value, TEST_VALUE_2);
   }
 
   @Test
   void get() {
     SingleLinkedList list = new SingleLinkedList();
-    list.add(TEST_VALUE);
+    list.add(TEST_VALUE_1);
 
-    assertEquals(list.get(0), TEST_VALUE);
+    assertEquals(list.get(0), TEST_VALUE_1);
   }
 
   @Test
@@ -65,15 +120,27 @@ class SingleLinkedListTest {
   void addAtIndex() {
     SingleLinkedList list = new SingleLinkedList();
 
-    list.addAtIndex(0, TEST_VALUE);
+    list.addAtIndex(0, TEST_VALUE_1);
 
-    assertEquals(list.get(0), TEST_VALUE);
+    assertEquals(list.get(0), TEST_VALUE_1);
+  }
+
+  @Test
+  void addAtIndex_addTwoValues() {
+    SingleLinkedList list = new SingleLinkedList();
+
+
+    list.addAtIndex(0, TEST_VALUE_1);
+    list.addAtIndex(1, TEST_VALUE_2);
+
+    assertEquals(list.get(0), TEST_VALUE_1);
+    assertEquals(list.get(1), TEST_VALUE_2);
   }
 
   @Test
   void addAtIndex_throwsOBE_ifIndexOutOfBounds() {
     SingleLinkedList list = new SingleLinkedList();
 
-    assertThrows(IndexOutOfBoundsException.class, () -> list.addAtIndex(NON_EXISTENT_VALUE, TEST_VALUE));
+    assertThrows(IndexOutOfBoundsException.class, () -> list.addAtIndex(NON_EXISTENT_VALUE, TEST_VALUE_1));
   }
 }

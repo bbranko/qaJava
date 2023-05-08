@@ -2,7 +2,7 @@ package qajava.tasks.dataStructures;
 
 public class SingleLinkedList implements IntList {
 
-  private Integer value;
+  protected Integer value;
 
   @Override
   public void add(Integer value) {
