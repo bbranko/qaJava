@@ -18,12 +18,41 @@ public class SingleLinkedList implements IntList {
       }
       next.add(value);
     }
-
   }
 
   @Override
   public void remove(Integer value) {
-    this.value = null;
+    final boolean doIContain = Objects.equals(this.value, value);
+
+    if (doIContain) {
+      if (next == null) {
+        //if this is the only value, just remove it
+        this.value = null;
+      } else {
+        // if there is next value in list, next value becomes first
+        this.value = next.value;
+        this.next = next.next;
+      }
+    } else if (next != null) {
+      //else we need to traverse rest of the list
+      SingleLinkedList previous = this;
+      SingleLinkedList next = this.next;
+
+      while (next != null) {
+        boolean doesNextOneContain = Objects.equals(next.value, value);
+        if (doesNextOneContain) {
+          //if next element contains number to be removed, remove element by rewiring
+          //(we simply skip the element, and Garbage Collector will take care of the rest)
+          previous.next = next.next;
+          return; //no need to continue.
+        } else {
+          //move to next element
+          previous = next;
+          next = next.next;
+        }
+      }
+    }
+
   }
 
   @Override
