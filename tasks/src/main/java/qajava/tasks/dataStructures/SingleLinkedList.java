@@ -57,17 +57,12 @@ public class SingleLinkedList implements IntList {
     if (index == 0) {
       //this is always first (index 0) element
       return this;
-    } else {
+    } else if (next != null) {
       //for other indexes, we have to traverse rest of the list
-      int currentIndex = 1;
-      SingleLinkedList current = next;
-      while (currentIndex < index && current != null) {
-        currentIndex++;
-        current = current.next;
-      }
-
-      return current;
+      return next.getElementAtIndex(index - 1);
     }
+
+    return null;
   }
 
   @Override
@@ -109,22 +104,20 @@ public class SingleLinkedList implements IntList {
     if (index < 0) {
       throw new IndexOutOfBoundsException("Index cannot be negative!");
     }
+    if (index > 1 && next == null) {
+      throw new IndexOutOfBoundsException("Index out of bounds!");
+    }
 
     if (index == 0) {
       insertValueAtIndex0(value);
-    } else {
-      //we need to traverse the list to find index where to insert element
-      SingleLinkedList previous = getElementAtIndex(index - 1);
+    } else if (index == 1) {
+      SingleLinkedList newElement = new SingleLinkedList();
+      newElement.value = value;
+      newElement.next = next;
 
-      if (previous == null) {
-        throw new IndexOutOfBoundsException("Index out of bounds!");
-      } else {
-        //insert and rewire
-        SingleLinkedList newElement = new SingleLinkedList();
-        newElement.value = value;
-        newElement.next = previous.next;
-        previous.next = newElement;
-      }
+      next = newElement;
+    } else {
+      next.addAtIndex(index - 1, value);
     }
 
   }
