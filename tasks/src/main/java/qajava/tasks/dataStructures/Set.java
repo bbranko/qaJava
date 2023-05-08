@@ -15,7 +15,7 @@ public class Set implements IntCollection {
   @Override
   public void add(Integer value) {
     //only add value if unique
-    if(!values.contains(value)){
+    if (!values.contains(value)) {
       values.add(value);
     }
   }
@@ -30,5 +30,10 @@ public class Set implements IntCollection {
   @Override
   public Boolean contains(Integer value) {
     return values.contains(value);
+  }
+
+  @Override
+  public String toString() {
+    return "Set{" + values.valuesToString() + '}';
   }
 }

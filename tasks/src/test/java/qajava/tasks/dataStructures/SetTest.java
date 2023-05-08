@@ -61,7 +61,10 @@ class SetTest {
     set.add(TEST_VALUE_1);
     set.add(TEST_VALUE_2);
     set.add(TEST_VALUE_1);
+    System.out.println(set); //instead of log
+
     set.remove(TEST_VALUE_1);
+    System.out.println(set); //instead of log
 
 
     //test

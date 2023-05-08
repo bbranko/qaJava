@@ -139,4 +139,25 @@ public class DoublyLinkedList implements IntList {
 
   }
 
+
+  public String valuesToString() {
+    StringBuilder valuesString = new StringBuilder();
+
+    if (value != null) {
+      DoublyLinkedList next = this;
+      do {
+        valuesString.append(next.value).append(", ");
+        next = next.next;
+      } while (next != null);
+      valuesString.delete(valuesString.length() - 2, valuesString.length());
+    }
+
+    return valuesString.toString();
+  }
+
+  @Override
+  public String toString() {
+    return "DoublyLinkedList[" + valuesToString() + ']';
+  }
+
 }

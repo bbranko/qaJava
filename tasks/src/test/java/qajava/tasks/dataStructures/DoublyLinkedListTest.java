@@ -180,6 +180,7 @@ class DoublyLinkedListTest {
     //          | 1    |     | 3    |     | 2    |
     //          | next | --> | next | --> | next | --> null
     // null <-- | prev | <-- | prev | <-- | prev |
+    System.out.println(list);
 
     assertEquals(list.value, 1);
     assertEquals(list.next, list.getElementAtIndex(1));
@@ -196,6 +197,7 @@ class DoublyLinkedListTest {
     //          | 1    |     | 2    |
     //          | next | --> | next | --> null
     // null <-- | prev | <-- | prev |
+    System.out.println(list);
 
     assertEquals(list.value, 1);
     assertEquals(list.next, list.getElementAtIndex(1));

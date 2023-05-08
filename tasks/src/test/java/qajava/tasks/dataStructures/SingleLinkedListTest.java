@@ -63,9 +63,11 @@ class SingleLinkedListTest {
     SingleLinkedList list = new SingleLinkedList();
     list.add(TEST_VALUE_1);
     list.add(TEST_VALUE_2);
+    System.out.println(list); //instead of log
 
     //operation under test
     list.remove(TEST_VALUE_1);
+    System.out.println(list); //instead of log
 
     //test
     assertFalse(list.contains(TEST_VALUE_1));

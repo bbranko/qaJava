@@ -119,7 +119,25 @@ public class SingleLinkedList implements IntList {
     } else {
       next.addAtIndex(index - 1, value);
     }
-
   }
 
+  public String valuesToString() {
+    StringBuilder valuesString = new StringBuilder();
+
+    if (value != null) {
+      SingleLinkedList next = this;
+      do {
+        valuesString.append(next.value).append(", ");
+        next = next.next;
+      } while (next != null);
+      valuesString.delete(valuesString.length() - 2, valuesString.length());
+    }
+
+    return valuesString.toString();
+  }
+
+  @Override
+  public String toString() {
+    return "SingleLinkedList[" + valuesToString() + ']';
+  }
 }
