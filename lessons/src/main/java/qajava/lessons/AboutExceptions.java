@@ -60,9 +60,9 @@ public class AboutExceptions {
 
     try {
       System.out.println("Finally, try-catch blocks can have a finally block.");
-//      throw new Exception();
+      throw new Exception();
     } catch (Exception e) {
-      System.out.println("Though finally block WILL NOT execute if we rethrow an from a catch exception!!!");
+      System.out.println("Even if we throw an exception that crashes the app in the end, finally block WILL execute BEFORE it!!!");
       throw new RuntimeException("Throwing exception from a catch - Yeah - you can do it too! B-)");
     } finally {
       System.out.println(
