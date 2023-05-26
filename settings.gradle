@@ -24,5 +24,7 @@ gradle <taskName> --dry-run - to list which task would be executed and in what o
 
 rootProject.name = 'qaJava'
 include('lessons-java')
-include('lessons-spring')
+include('lessons-spring:just-context')
+include('lessons-spring:autoconfiguration')
+include('lessons-spring:web')
 include('tasks-java')
