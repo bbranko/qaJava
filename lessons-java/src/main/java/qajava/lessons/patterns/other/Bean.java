@@ -1,4 +1,4 @@
-package qajava.lessons.patterns.creational;
+package qajava.lessons.patterns.other;
 
 import java.io.Serializable;
 
